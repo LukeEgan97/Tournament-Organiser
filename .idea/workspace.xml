@@ -2,8 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da5389ef-dcdb-4649-b626-19cad5e42414" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Components/Match.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Pool.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/RegisteredTeam.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Timetable.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.firebase/hosting.YnVpbGQ.cache" beforeDir="false" afterPath="$PROJECT_DIR$/.firebase/hosting.YnVpbGQ.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,9 +23,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
-        <option value="TypeScript File" />
         <option value="JavaScript File" />
+        <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -61,7 +67,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="npm.build">
+  <component name="RunManager" selected="npm.npm start">
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
       <method v="2" />
     </configuration>
@@ -127,8 +133,20 @@
       <workItem from="1583421124347" duration="11585000" />
       <workItem from="1583436331339" duration="4186000" />
       <workItem from="1583933235204" duration="12658000" />
-      <workItem from="1584705295178" duration="127000" />
+      <workItem from="1584705295178" duration="784000" />
+      <workItem from="1584985401566" duration="943000" />
+      <workItem from="1585048144216" duration="15000" />
+      <workItem from="1585321345775" duration="628000" />
+      <workItem from="1585566110883" duration="3794000" />
     </task>
+    <task id="LOCAL-00001" summary="Ignored API Key">
+      <created>1584705497403</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1584705497403</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -139,10 +157,16 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Ignored API Key" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ignored API Key" />
   </component>
 </project>
