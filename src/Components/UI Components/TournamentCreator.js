@@ -1,7 +1,7 @@
 import React from "react";
 // @ts-ignore
 import {Button, Form, FormGroup, Label, Input, Container, Col} from "reactstrap";
-import firebase from "./firestore";
+import firebase from "../firestore";
 
 
 class TournamentCreator extends React.Component{

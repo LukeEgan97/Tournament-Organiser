@@ -1,13 +1,17 @@
 import React from 'react';
 import './App.css';
-import LandingScreen from "./Components/LandingScreen";
-import SignInPage from "./SignInPage";
+
+import UserProvider from "./Components/Providers/UserProvider";
+import Application from "./Application";
+
 
 function App() {
-
+    const user = null;
   return (
-    <div className="App">
-    </div>
+      <UserProvider>
+          <Application />
+      </UserProvider>
+
   );
 }
 

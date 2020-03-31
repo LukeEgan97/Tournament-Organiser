@@ -1,6 +1,6 @@
 import React from 'react';
-import TeamInput from "./TeamInput";
-import TournamentCreator from "./TournamentCreator";
+import TeamInput from "../UI Components/TeamInput";
+import TournamentCreator from "../UI Components/TournamentCreator";
 
 
 class Pool extends React.Component{
