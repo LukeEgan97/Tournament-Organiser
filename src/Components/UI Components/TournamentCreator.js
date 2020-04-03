@@ -1,6 +1,6 @@
 import React from "react";
 import firebase, {auth} from "../firestore";
-import {Form, FormGroup, Button, Container, FormControl, Col} from "react-bootstrap";
+import {Form, FormGroup, Button, Container, FormControl, Col, Row} from "react-bootstrap";
 
 class TournamentCreator extends React.Component{
     state = {
@@ -10,7 +10,11 @@ class TournamentCreator extends React.Component{
         noTeams: "",
         pools: "",
         powerPools:"",
+        startDate: "",
+        endDate: "",
         creator: firebase.auth().currentUser.displayName,
+        uid: firebase.auth().currentUser.uid,
+
     };
 
     db = firebase.firestore();
@@ -32,15 +36,15 @@ class TournamentCreator extends React.Component{
         else if (name === "noPools") {
             this.setState({pools: value});
         }
-
     };
 
     handleSubmit = event=>
     {
             event.preventDefault();
-
             const tournament = {
                 name: this.state.name,
+                startDate: document.getElementById("startDate").value,
+                endDate: document.getElementById("endDate").value,
                 location: this.state.location,
                 noTeams: this.state.noTeams,
                 bracket: document.getElementById("bracketStyle").value,
@@ -52,18 +56,31 @@ class TournamentCreator extends React.Component{
         this.db.collection('tournaments').doc(this.state.name).set(
             tournament
         );
+
+        this.db.collection('users').doc(this.state.uid).collection('createdTournaments').doc(this.state.name).set(
+            {name: this.state.name, startDate: this.state.startDate}
+        );
     };
 
     render() {
         return (
-     <Container className = "centered">
-         <Col sm="12" xl="10">
-             {this.state.creator}
-    <Form >
+
+    <Form className="centered">
+
+
         <Form.Group>
         <Form.Label>Tournament Name</Form.Label>
         <FormControl type ="text" name="tournamentName"  placeholder="Tournament Name" onChange={this.onChangeHandler} required/>
         </Form.Group>
+        <Form.Group>
+            <Form.Label>Start Date</Form.Label>
+            <Form.Control type ="date" id = "startDate" required/>
+        </Form.Group>
+        <Form.Group>
+            <Form.Label>End Date</Form.Label>
+            <Form.Control type ="date" id = "endDate" required/>
+        </Form.Group>
+
         <Form.Group>
         <Form.Label>Tournament Location</Form.Label>
             <FormControl type="text" name = "location"  placeholder = "Location" onChange={this.onChangeHandler} required/>
@@ -74,7 +91,7 @@ class TournamentCreator extends React.Component{
         </FormGroup>
         <Form.Group>
         <Form.Label>No Pools</Form.Label>
-            <FormControl  name = "noPools" placeholder="Number Of Pools" type="number" min={"1"} onChange={this.onChangeHandler}/>
+            <FormControl  name = "noPools" placeholder="Number Of Pools" type="number" min="1" onChange={this.onChangeHandler}/>
         </Form.Group>
         <Form.Group>
         <Form.Label>Bracket Style</Form.Label>
@@ -93,9 +110,6 @@ class TournamentCreator extends React.Component{
         </Form.Group>
         <Button onClick={this.handleSubmit}>Create Tournament </Button>
     </Form>
-         </Col>
-     </Container>
-
         )
 }
 }

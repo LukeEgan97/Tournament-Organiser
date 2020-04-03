@@ -5,41 +5,67 @@ import {Link, navigate} from "@reach/router";
 
 
 const SignUp = () => {
+    const db = firebase.firestore();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [displayName, setDisplayName] = useState("");
-    const [error, setError] = useState(null);
+    const [error, setError] = useState("");
     const tournaments=[];
-    const userList = [];
+    const userList = nameCheck();
+    const [emailError,setEmailError] = useState("");
+    const [nameError,setnameError] = useState("");
+    const [passwordError,setPasswordError] = useState("");
 
 
 
-
-    const db = firebase.firestore();
 
     const createUserWithEmailAndPasswordHandler = async (event, email, password) => {
         event.preventDefault();
-            try {
-                const {user} = await auth.createUserWithEmailAndPassword(email, password);
-                await generateUserDocument(user, {displayName, tournaments});
-                user.updateProfile({
-                    displayName: displayName,
-                }).then(function () {
-                    console.log(user.displayName);
-                })
-                    .catch(function (error) {
-                        // an error occured
-                    });
-                console.log(user.displayName);
-                await navigate('/');
-            } catch (error) {
-                setError('Error Signing up with email and password');
-            }
-
-            setEmail("");
-            setPassword("");
-            setDisplayName("");
+        setEmailError("");
+        setPasswordError("");
+       if (userList.includes(displayName)===false) {
+           setnameError("")
+           try {
+               const {user} = await auth.createUserWithEmailAndPassword(email, password).catch(function (error) {
+                   var errorCode = error.code;
+                   var errorMessage = error.message;
+                   if (errorCode == 'auth/email-already-in-use') {
+                       setEmailError('That Email Is In Use')
+                   } else if (errorCode == 'auth/invalid-email') {
+                       setEmailError('Please Enter A Valid Email')
+                   } else if (errorCode == 'auth/weak-password') {
+                       setPasswordError('Password Must Be 6 characters or more')
+                   } else {
+                       console.log(error);
+                   }
+               });
+               await generateUserDocument(user, {displayName, tournaments});
+               user.updateProfile({
+                   displayName: displayName,
+               }).then(function () {
+                   console.log(user.displayName);
+                   db.collection('userNames').doc(displayName).set(
+                       {displayName}
+                   );
+               })
+                   .catch(function (error) {
+                       // an error occured
+                   });
+               console.log(user.displayName);
+               await navigate('/');
+           } catch (error) {
+               setError('Error Signing up with email and password');
+               alert(error);
+           }
+           setPassword("");
+       }
+       else{
+           setnameError("UserName Is Taken")
+       }
+       setPassword("");
     };
+
+
     const onChangeHandler = event => {
         const { name, value } = event.currentTarget;
         if (name === "displayName") {
@@ -53,19 +79,15 @@ const SignUp = () => {
     };
 
 function nameCheck(){
-
+let users =[];
     db.collection("userNames").get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
-         userList.push( doc.data().displayName)
+         users.push( doc.data().displayName)
         });
-        console.log(userList);
-        if (userList.includes(displayName)===true)
-            alert("Name Is Taken");
-
     });
-
+return users;
 }
 
 
@@ -92,7 +114,7 @@ function nameCheck(){
                         onChange={event => onChangeHandler(event)}
                         required
                     />
-                        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                        <p style={{color:"red"}}> {nameError}</p>
                     </Form.Group>
                     <Form.Group>
                     <Form.Label >
@@ -107,9 +129,7 @@ function nameCheck(){
                         onChange={event => onChangeHandler(event)}
                         required
                     />
-                        <Form.Control.Feedback type="invalid">
-                            Please choose a username.
-                        </Form.Control.Feedback>
+                        <p style={{color:"red"}}> {emailError}</p>
                     </Form.Group>
                     <FormGroup>
                     <Form.Label>
@@ -124,6 +144,7 @@ function nameCheck(){
                         onChange={event => onChangeHandler(event)}
                         required
                     />
+                        <p style={{color:"red"}}> {passwordError}</p>
                     </FormGroup>
                     <Button onClick={event => {createUserWithEmailAndPasswordHandler(event, email, password) }}>
 

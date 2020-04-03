@@ -11,17 +11,29 @@ const SignIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
-
+    const [emailError,setEmailError] = useState("");
+    const [passwordError,setPasswordError] = useState("");
 
 
     const signInWithEmailAndPasswordHandler = (event,email, password) => {
         event.preventDefault();
-        auth.signInWithEmailAndPassword(email, password).then(() => {
+        setPasswordError("");
+        setEmailError("");
+        auth.signInWithEmailAndPassword(email, password).catch(function(error){
+            var errorCode = error.code;
+            var message =error.message
+            if (errorCode=='auth/user-not-found') {
+                console.log(message)
+                setEmailError("User Not Found. Please Try Again")
+            }
+                else if(errorCode = 'auth/wrong-password'){
+                    setPasswordError("Password is incorrect. Please Try Again.")
+                setPassword("");
+                }
+
+        }).then(() => {
             // Logged in successfully
             navigate('/');
-        }).catch(error => {
-            setError("Error signing in with password and email!");
-            console.error("Error signing in with password and email", error);
         });
 
     };
@@ -58,6 +70,7 @@ const SignIn = () => {
                    id="userEmail"
                    onChange={event => onChangeHandler(event)}
                />
+               <p style={{color:"red"}}> {emailError}</p>
            </FormGroup>
 
            <FormGroup>
@@ -72,6 +85,7 @@ const SignIn = () => {
                    id="userPassword"
                    onChange={event => onChangeHandler(event)}
                />
+               <p style={{color:"red"}}> {passwordError}</p>
            </FormGroup>
            <Button  color= "success" onClick = {(event) => {signInWithEmailAndPasswordHandler(event, email, password)}}>
                Sign In

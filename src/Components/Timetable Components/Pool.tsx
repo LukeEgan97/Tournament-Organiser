@@ -1,5 +1,5 @@
 import React from 'react';
-import TeamInput from "../UI Components/TeamInput";
+import TeamInput from "../UI Components/Register";
 import TournamentCreator from "../UI Components/TournamentCreator";
 
 

@@ -1,12 +1,11 @@
 import React, {useContext} from "react";
-import {Redirect, Router} from "@reach/router";
+import { Router} from "@reach/router";
 import {UserContext} from "./Components/Providers/UserProvider";
 import LandingScreen from "./Components/UI Components/LandingScreen";
 import SignUp from "./Components/UI Components/SignUp";
 import SignIn from "./Components/UI Components/SignIn";
-import TeamInput from "./Components/UI Components/TeamInput";
 import TournamentCreator from "./Components/UI Components/TournamentCreator";
-
+import Register from "./Components/UI Components/Register";
 
 
 
@@ -17,6 +16,7 @@ function Application() {
             <Router>
                 <LandingScreen path="/"/>
                 <TournamentCreator path ="create"/>
+                <Register path="register"/>
              </Router>
 
             :
