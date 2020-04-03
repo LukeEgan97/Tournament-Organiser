@@ -1,23 +1,29 @@
 import React, {useState} from 'react';
-import {Form, Label,Input, FormGroup, Button, Container, Row, Col} from "reactstrap";
-import ReactDOM from "react-dom";
-import SignUp from "./SignUp";
-import firebase, {auth} from "../firestore";
-import { Link } from "@reach/router";
+import {Form, FormGroup, Button, Container, Row, Col} from "react-bootstrap";
+
+
+
+import  {auth} from "../firestore";
+import {Link, navigate} from "@reach/router";
 
 
 const SignIn = () => {
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
 
+
+
     const signInWithEmailAndPasswordHandler = (event,email, password) => {
         event.preventDefault();
-        auth.signInWithEmailAndPassword(email, password).catch(error => {
+        auth.signInWithEmailAndPassword(email, password).then(() => {
+            // Logged in successfully
+            navigate('/');
+        }).catch(error => {
             setError("Error signing in with password and email!");
             console.error("Error signing in with password and email", error);
         });
+
     };
 
     const onChangeHandler = (event) => {
@@ -41,10 +47,10 @@ const SignIn = () => {
             <h1> Sign In </h1>
        <Form>
            <FormGroup>
-               <Label >
+               <Form.Label >
                    Email:
-               </Label>
-               <Input
+               </Form.Label>
+               <Form.Control
                    type="email"
                    name="userEmail"
                    value={email}
@@ -55,10 +61,10 @@ const SignIn = () => {
            </FormGroup>
 
            <FormGroup>
-               <Label>
+               <Form.Label>
                    Password:
-               </Label>
-               <Input
+               </Form.Label>
+               <Form.Control
                    type="password"
                    name="userPassword"
                    value={password}

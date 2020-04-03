@@ -1,13 +1,12 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom'
 import './index.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 
 
 import * as serviceWorker from './serviceWorker';
-import TeamInput from "./Components/UI Components/TeamInput";
-import UserProvider from "./Components/Providers/UserProvider";
+
 
 ReactDOM.render(
 

@@ -1,9 +1,6 @@
 import React from 'react';
 
-import Container from "reactstrap/lib/Container";
-import Button from "reactstrap/lib/Button";
-import Col from "reactstrap/lib/Col";
-import Row from "reactstrap/lib/Row";
+import {Container,Row,Col,Button} from "react-bootstrap";
 
 
 class NavBar extends React.Component {

@@ -1,9 +1,9 @@
 import React from 'react';
 import firebase from "../firestore";
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import {Form,FormControl,Button, FormGroup} from "react-bootstrap";
 
 
- class TeamInput extends React.Component {
+class TeamInput extends React.Component {
     state = {
         name: '',
         tournament: '',
@@ -71,15 +71,15 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
                 <Form onSubmit={this.handleSubmit}>
 
                         <FormGroup>
-                    <Label>
+                    <Form.Label>
                         Team Name:
-                        <Input type="text" name="name" onChange={this.handleName} />
-                    </Label>
+                        <FormControl type="text" name="name" onChange={this.handleName} />
+                    </Form.Label>
                     </FormGroup>
                     <FormGroup>
-                        <Input type="select" id="select" onChange={this.handleTournament}>
+                        <FormControl type="select" id="select" onChange={this.handleTournament}>
                             <option value="default">Select Tournament</option>
-                        </Input>
+                        </FormControl>
                     </FormGroup>
                     <Button type="submit">Add</Button>
                 </Form>
