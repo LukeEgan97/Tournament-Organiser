@@ -90,7 +90,6 @@ let users =[];
 return users;
 }
 
-
     return (
 
         <div>
@@ -146,8 +145,9 @@ return users;
                     />
                         <p style={{color:"red"}}> {passwordError}</p>
                     </FormGroup>
-                    <Button onClick={event => {createUserWithEmailAndPasswordHandler(event, email, password) }}>
-
+                    <Button onClick={event => {createUserWithEmailAndPasswordHandler(event, email, password).then(function() {
+                        navigate("/")
+                    }); }}>
                         Sign up
                     </Button>
                     <Button onClick={nameCheck}>Name Check</Button>

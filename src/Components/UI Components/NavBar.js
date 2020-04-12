@@ -1,21 +1,35 @@
 import React from 'react';
 
-import {Container,Row,Col,Button} from "react-bootstrap";
+import {Container,Row,Col,Button,Navbar, Nav} from "react-bootstrap";
+import {Link, navigate} from "@reach/router";
+import {auth} from "../firestore";
 
 
-class NavBar extends React.Component {
+class Navigation extends React.Component {
         render() {
                 return (
-<div>
-                    <Container className='bg-primary'>
-                        <Row >
-                            <Col><Button color="primary">Manage Tournament</Button></Col>
-                            <Col><Button color = "primary">Register For Tournament</Button></Col>
-                        </Row>
-                    </Container>
+<div >
+    <Navbar bg="light" expand="lg">
+        <Navbar.Brand >UltiOrganizer</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className={"mr-auto"}>
+        <Nav.Link href="/">Home</Nav.Link>
+        <Nav.Link href="/register">Register for Tournaments</Nav.Link>
+        <Nav.Link href="/create">    Create a Tournament</Nav.Link>
+        <Nav.Link href="/manage">Manage A Tournament</Nav.Link>
+        <Nav.Link href="/view">View Schedules</Nav.Link>
+        </Nav>
+        <Button onClick = {() => {auth.signOut().then(function() {
+            navigate("/")
+        });}}> Sign Out </Button>
+
+        </Navbar.Collapse>
+    </Navbar>
+
 </div>
                 )
         }
 }
 
-export default NavBar;
+export default Navigation;
