@@ -16,15 +16,12 @@ const SignUp = () => {
     const [nameError,setnameError] = useState("");
     const [passwordError,setPasswordError] = useState("");
 
-
-
-
     const createUserWithEmailAndPasswordHandler = async (event, email, password) => {
         event.preventDefault();
         setEmailError("");
         setPasswordError("");
        if (userList.includes(displayName)===false) {
-           setnameError("")
+           setnameError("");
            try {
                const {user} = await auth.createUserWithEmailAndPassword(email, password).catch(function (error) {
                    var errorCode = error.code;
@@ -43,7 +40,6 @@ const SignUp = () => {
                user.updateProfile({
                    displayName: displayName,
                }).then(function () {
-                   console.log(user.displayName);
                    db.collection('userNames').doc(displayName).set(
                        {displayName}
                    );
@@ -51,11 +47,8 @@ const SignUp = () => {
                    .catch(function (error) {
                        // an error occured
                    });
-               console.log(user.displayName);
-               await navigate('/');
            } catch (error) {
                setError('Error Signing up with email and password');
-               alert(error);
            }
            setPassword("");
        }
@@ -145,9 +138,8 @@ return users;
                     />
                         <p style={{color:"red"}}> {passwordError}</p>
                     </FormGroup>
-                    <Button onClick={event => {createUserWithEmailAndPasswordHandler(event, email, password).then(function() {
-                        navigate("/")
-                    }); }}>
+                    <Button onClick={event => {createUserWithEmailAndPasswordHandler(event, email, password).then(navigate("/")
+                    ); }}>
                         Sign up
                     </Button>
                     <Button onClick={nameCheck}>Name Check</Button>

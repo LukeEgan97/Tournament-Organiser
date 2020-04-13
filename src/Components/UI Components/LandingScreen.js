@@ -60,7 +60,7 @@ const LandingScreen = () => {
                         </Card>
 
                             <Card >
-                                <Card.Img src = "/MKBhD.jpg" width="300" height="300"/>
+                                <Card.Img src ="/MKBHD.jpg"  width="300" height="300"/>
                                 <Card.Body className="text-center">
                                     <Card.Title>View the Schedules Of Tournaments You Have Joined</Card.Title>
                                     <Card.Text>See The Schedule For A Tournament You Registered For</Card.Text>
@@ -72,7 +72,6 @@ const LandingScreen = () => {
                 </Row>
             </Container>
             </div>
-
         )
 };
 

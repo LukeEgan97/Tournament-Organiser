@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useContext} from "react";
 import firebase, {auth} from "../firestore";
 import {Form, FormGroup, Button, Container, FormControl, Col, Row} from "react-bootstrap";
 import Navigation from "./NavBar";
+import {UserContext} from "../Providers/UserProvider";
 
 class TournamentCreator extends React.Component{
     constructor(props) {

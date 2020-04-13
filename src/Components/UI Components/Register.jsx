@@ -49,7 +49,7 @@ class Register extends React.Component {
             name: this.state.name,
         });
         this.db.collection('users').doc(this.state.uid).collection('registeredTournaments').doc(this.state.name).set(
-           this.state.tournament
+            {name: this.state.name}
         );
 
     };

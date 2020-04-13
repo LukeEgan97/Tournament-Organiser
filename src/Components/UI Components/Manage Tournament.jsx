@@ -20,10 +20,12 @@ class ManageTournament extends React.Component{
             teams:[],
             seedingForm: false,
         };
+
         this.populateTeams = this.populateTeams.bind(this);
         this.handleSeedingSubmit =this.handleSeedingSubmit.bind(this);
         this.onChangeHandler = this.onChangeHandler.bind(this);
     }
+
 
 
     componentDidMount() {
@@ -39,6 +41,8 @@ class ManageTournament extends React.Component{
     }
 
     populateTeams(){
+        this.setState({teams :[]});
+        this.setState({renderScheduleFunctions: false});
         for (let i=0; i < this.state.tournaments.length; i++) {
             if (this.state.tournaments[i].name === this.state.tournamentName) {
                 this.setState({tournament: this.state.tournaments[i]});
@@ -120,7 +124,9 @@ class ManageTournament extends React.Component{
             }
             sortedTeams.sort((a, b) => (a.seeding > b.seeding) ? 1 : -1);
             this.setState({teams: sortedTeams});
+
         }
+        this.setState({renderScheduleFunctions: true})
     };
 
      removeNonSeeded = (obj) => {
@@ -145,11 +151,15 @@ return(
     </Form.Control>
     </Col>
         <Col lg={10}>
-        <Button style={{marginBottom :"20px"}} onClick={this.populateTeams}>Select Teams For This Tournament</Button>
+        <Button style={{marginBottom :"20px"}} onClick={this.populateTeams} disabled={!this.state.tournamentName}>Select Teams For This Tournament</Button>
         </Col>
     </Form>
         {this.renderSeedingForm()}
-        <ScheduleFunctions tournament={this.state.tournament} teams={this.state.teams} docRef={docRef}/>
+        <div>
+            {this.state.renderScheduleFunctions === true &&
+            <ScheduleFunctions tournament={this.state.tournament} teams={this.state.teams} docRef={docRef}/>
+            }
+        </div>
     </div>
     </div>
 
