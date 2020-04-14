@@ -4,7 +4,7 @@ import {Container,Row,Col,Button,Navbar, Nav} from "react-bootstrap";
 import {Link, navigate} from "@reach/router";
 import {auth} from "../firestore";
 
-
+//Navbar is rendered above every component, will condense on different screen sizes
 class Navigation extends React.Component {
         render() {
                 return (

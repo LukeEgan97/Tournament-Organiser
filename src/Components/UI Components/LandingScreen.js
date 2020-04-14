@@ -8,6 +8,8 @@ import {UserContext} from "../Providers/UserProvider";
 import TournamentCreator from "./TournamentCreator";
 import Navigation from "./NavBar";
 
+// Landing Screen Is Pretty much just cards with links to more interesting components
+//Card Deck will Organise the cards at equal heights so don't have to worry about them looking weird on different screens
 
 const LandingScreen = () => {
     const user = firebase.auth().currentUser;
@@ -21,9 +23,7 @@ const LandingScreen = () => {
             <Container>
 
                 <div>
-                    <Router>
-                        <TournamentCreator path ="create"/>
-                    </Router>
+
                 </div>
                 <h1 className="text-center" style={{color:"red"}} > Welcome {displayName} </h1>
                 <Row>

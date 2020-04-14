@@ -30,6 +30,12 @@ class ScheduleView extends React.Component{
         )
     }
  tableRenderer() {
+        /*To map the table, headers are first mapped as normal to a row
+        * Mapping the times is more complicated
+        * First one <td> is created from timelabel
+        *Then split the table array into portions dependent on how many pitches there (headers-1 because the first heading is time)
+        * following this map over the slice you .map as normal, using .slice to create an array from the first index in that row to the last one
+        *   */
      const NO_OF_PITCHES = (this.state.headers.length-1);
 
     let table = <Table striped bordered hover responsive="sm" id='mytable'>

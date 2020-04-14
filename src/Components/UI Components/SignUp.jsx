@@ -43,6 +43,7 @@ const SignUp = () => {
                    db.collection('userNames').doc(displayName).set(
                        {displayName}
                    );
+                   navigate("/")
                })
                    .catch(function (error) {
                        // an error occured
@@ -138,11 +139,9 @@ return users;
                     />
                         <p style={{color:"red"}}> {passwordError}</p>
                     </FormGroup>
-                    <Button onClick={event => {createUserWithEmailAndPasswordHandler(event, email, password).then(navigate("/")
-                    ); }}>
+                    <Button onClick={event => {createUserWithEmailAndPasswordHandler(event, email, password); }}>
                         Sign up
                     </Button>
-                    <Button onClick={nameCheck}>Name Check</Button>
                 </Form>
                 <p> Already have an account? </p>
                         <Link to="/" >

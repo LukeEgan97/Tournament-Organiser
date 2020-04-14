@@ -25,7 +25,7 @@ class TournamentCreator extends React.Component{
 
     db = firebase.firestore();
 
-     onChangeHandler = event => {
+     onChangeHandler = event => { //by assigning very input a name, only need one event handle to get all the fields you need in state
        let  name=event.target.name;
         this.setState({[name]: event.target.value});
     };

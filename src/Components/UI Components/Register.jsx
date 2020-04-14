@@ -29,7 +29,7 @@ class Register extends React.Component {
         this.setState({errorText: "There Was An Error Retreiving Documents, Please Refresh"})
         console.log(Error);
     });
-        let registeredTournaments = this.db.collection("users").doc(this.state.uid).collection("tournaments").get().then(
+        let registeredTournaments = this.db.collection("users").doc(this.state.uid).collection("registeredTournaments").get().then(
         querySnapshot => {
             registeredTournaments = querySnapshot.docs.map(doc=> doc.data());
             this.setState({registeredTournaments});
@@ -45,23 +45,31 @@ class Register extends React.Component {
         this.db.settings({
             timestampsInSnapshots: true
         });
-       this.db.collection('tournaments').doc(this.state.tournament).collection('teams').doc(this.state.name).set({
+       this.db.collection('tournaments').doc(this.state.tournament).collection('Teams').doc(this.state.name).set({
             name: this.state.name,
         });
-        this.db.collection('users').doc(this.state.uid).collection('registeredTournaments').doc(this.state.name).set(
-            {name: this.state.name}
+        this.db.collection('users').doc(this.state.uid).collection('registeredTournaments').doc(this.state.tournament).set(
+            {name: this.state.tournament}
         );
+        alert("Succesfully Registered to Tournament")
+        let registeredTournaments = this.db.collection("users").doc(this.state.uid).collection("registeredTournaments").get().then(
+            querySnapshot => {
+                registeredTournaments = querySnapshot.docs.map(doc=> doc.data());
+                this.setState({registeredTournaments});
+            }
+        )
+    }
 
-    };
 
     handleUnregister= event =>{
         event.preventDefault();
-        this.db.collection("users").doc(this.state.uid).collection("tournaments").doc(this.state.unRegisterSelection).delete().then(success=>{
-            let registeredTournaments = this.db.collection("users").doc(this.state.uid).collection("tournaments").get().then(
+        this.db.collection("tournaments").doc(this.state.unRegisterSelection).collection("Teams").doc(this.state.name).delete();
+        this.db.collection("users").doc(this.state.uid).collection("registeredTournaments").doc(this.state.unRegisterSelection).delete().then(success=>{
+            alert("Succesfully Removed From Tournament");
+            let registeredTournaments = this.db.collection("users").doc(this.state.uid).collection("registeredTournaments").get().then(
                 querySnapshot => {
                     registeredTournaments = querySnapshot.docs.map(doc=> doc.data());
                     this.setState({registeredTournaments});
-                    this.setState({errorText: "" ,text: "You Have Successfully UnRegistered From The Tournament"});
                 }
 
             )
@@ -89,7 +97,7 @@ class Register extends React.Component {
 
                 <Form onSubmit={this.handleUnregister}>
                         <Form.Group>
-                            <Form.Label>Register For A Tournament</Form.Label>
+                            <Form.Label>UnRegister From A Tournament</Form.Label>
                             <Form.Control as ="select" id="select" value={this.state.unRegisterSelection} onChange={(e) => this.setState({unRegisterSelection: e.target.value, text: ""})}>
                                 <option>Select A Tournament To UnRegister From</option>
                                 {this.state.registeredTournaments.map((tournament) => <option key={tournament.name} value={tournament.name}>{tournament.name}</option>)}

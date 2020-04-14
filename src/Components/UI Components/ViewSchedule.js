@@ -2,6 +2,7 @@ import React from "react";
 import ScheduleView from "../Timetable Components/ScheduleView";
 import firebase from "../firestore";
 import {Button, Form} from "react-bootstrap";
+import NavBar from "./NavBar";
 
 
 class ViewSchedule extends React.Component{
@@ -35,6 +36,9 @@ class ViewSchedule extends React.Component{
     render(){
         return (
             <div>
+            <NavBar/>
+
+            <div>
                 {this.state.gotTournaments === true &&
                     <div>
                 <Form className="centered" onSubmit={this.handleSubmit}>
@@ -54,6 +58,7 @@ class ViewSchedule extends React.Component{
                         }
                     </div>
                 }
+            </div>
             </div>
 
         )
